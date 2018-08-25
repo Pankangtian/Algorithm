@@ -3,7 +3,7 @@ package com.kangtian.list;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class ListSolution {
+public class ListFromTailToHead {
   static   ArrayList<Integer> arrayList=new ArrayList<Integer>();
 
     //递归实现
@@ -27,7 +27,6 @@ public class ListSolution {
         }
         return arrayList;
     }
-
 
     //逆转指针
     public static   ArrayList<Integer> printListFromTailToHead2(ListNode listNode) {//假有四个节点，方向1》2,》3,》4  listNode >1
@@ -73,11 +72,3 @@ public class ListSolution {
 
 
 
-       class ListNode {
-         int val;
- ListNode next = null;
-
-         ListNode(int val) {
-        this.val = val;
-         }
-     }
