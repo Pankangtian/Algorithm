@@ -1,6 +1,7 @@
 package com.kangtian.tree;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -9,6 +10,43 @@ public class TreeUtil {
   static   int i=0;
     static  TreeNode tem;
   static Stack stack=new Stack();
+  private ArrayList<ArrayList<Integer>> arrayLists;
+
+    /**
+     * 题目描述
+     * 输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。
+     * 路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+     * (注意: 在返回值的list中，数组长度大的数组靠前)
+     * @param root
+     * @param target
+     * @return
+     */
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+        arrayLists=new ArrayList<ArrayList<Integer>>();
+        FindPath(root,target,"");
+        return arrayLists;
+    }
+    //递归遍历各节点，并利用String 统计路径，当满足target==0 &root.left==null&root.right==null，路径和为target，且为叶子节点
+    public void   FindPath(TreeNode root, int target,String path) {
+        if (root!=null) {
+            path += root.val+",";
+            target=target-root.val;
+            if (target==0 &root.left==null&root.right==null){
+                ArrayList<Integer> arrayList=new ArrayList<>();
+                String[] st = path.split(",");
+                for (int i=0;i<st.length;i++)
+                    arrayList.add(Integer.valueOf(st[i]));
+                arrayLists.add(arrayList);
+            }
+            if (target<0)//当小于零时，则其以下节点不用考虑
+                return ;
+            if (root.left != null)
+                FindPath(root.left,target,path);
+            if (root.right != null)
+                FindPath(root.right,target,path);
+        }
+    }
+
 
 
     //如果root2为root1的子树，则root2的前序遍历字段必为root1的子串
@@ -51,6 +89,43 @@ public class TreeUtil {
                 preTraver(root.right);
         }
         return re;
+    }
+    public static String preTraverStack(TreeNode pRootOfTree) {
+        Stack<TreeNode> stack=new Stack<>();
+        if (pRootOfTree==null)
+            return null;
+        stack.push(pRootOfTree);
+        TreeNode node;
+        while (!stack.isEmpty()){
+            node=stack.pop();
+            if (node.left!=null)
+                stack.push(node.left);
+            re+=node.val;
+            if (node.right!=null)
+                stack.push(node.right);
+
+        }
+        return re;
+
+    }
+
+    public static String medTraverStack(TreeNode pRootOfTree) {
+        Stack<TreeNode> stack=new Stack<>();
+            if (pRootOfTree==null)
+                return null;
+        TreeNode node=pRootOfTree;
+        while (node!=null||!stack.isEmpty()){
+            if (node!=null){
+                stack.push(node);
+                node=node.left;
+            }else {
+                node=stack.pop();
+                re+=node.val;
+                node=node.right;
+            }
+        }
+        return re;
+
     }
     //获取树的后序遍历
     public static String aftTraver(TreeNode root){
@@ -116,7 +191,10 @@ public class TreeUtil {
         TreeNode root=new TreeNode(22);
         root.left=new TreeNode(3);
         root.right=new TreeNode(4);
-        Mirror(root);
+        System.out.println(medTraverStack(root));
+        re="";
+        System.out.println(medTraver(root));
+
     }
 
 }

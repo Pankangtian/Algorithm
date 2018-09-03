@@ -1,6 +1,54 @@
 package com.kangtian.list;
 
+import com.kangtian.tree.TreeNode;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class RebuildListNode {
+
+
+    /**
+     * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。
+     * 要求不能创建任何新的结点，只能调整树中结点指针的指向。
+     * @param pRootOfTree
+     * @return
+     */
+    public TreeNode Convert(TreeNode pRootOfTree) {
+        Stack<TreeNode> stack=new Stack<>();
+        ArrayList<TreeNode> arrayList=new ArrayList<>();
+        if (pRootOfTree==null)
+            return null;
+        TreeNode node=pRootOfTree;
+        //将树的节点以非递归中序遍历的形式添加到list中，此时的list即为有序列表
+        while (node!=null||!stack.isEmpty()){
+            if (node!=null){
+                stack.push(node);
+                node=node.left;
+            }else {
+                node=stack.pop();
+                arrayList.add(node);
+                node=node.right;
+            }
+        }
+        int len=arrayList.size();
+        if (len<=1){
+            return arrayList.get(0);
+        }
+        //改变指针方向，使left指针改为从小到大，right改为从大到小
+        for (int i=0;i<len-1;i++){
+            arrayList.get(i).right=arrayList.get(i+1);
+            arrayList.get(len-1-i).left=arrayList.get(len-i-2);
+        }
+        return arrayList.get(0);
+
+    }
+
+    /**
+     * 逆序链表
+     * @param head
+     * @return
+     */
     public ListNode ReverseList(ListNode head) {
         ListNode buf = head; //buf>listNode>      1》2,》3,》4
         ListNode pre = buf;    //pre>buf>listNode>    1》2,》3,》4
