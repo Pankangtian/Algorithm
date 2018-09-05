@@ -12,7 +12,7 @@ public class CloneList {
      * @return
      */
     public RandomListNode Clone(RandomListNode pHead) {
-        HashMap<Integer,RandomListNode>  data= new HashMap<>();
+        HashMap<Integer,RandomListNode>  data= new HashMap<Integer,RandomListNode>();
         if (pHead==null)
             return null;
         RandomListNode tempPHead=pHead;
@@ -37,5 +37,8 @@ public class CloneList {
             tempPHead=tempPHead.next;
         }
         return head;
+    }
+    public static void main(String[] args){
+
     }
 }
