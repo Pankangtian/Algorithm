@@ -12,7 +12,7 @@ public class CloneList {
      * @return
      */
     public RandomListNode Clone(RandomListNode pHead) {
-        HashMap<Integer,RandomListNode>  data= new HashMap<>();
+        HashMap<Integer,RandomListNode>  data= new HashMap<>();//用于复制随机指针时快速定位到指针位置
         if (pHead==null)
             return null;
         RandomListNode tempPHead=pHead;
@@ -25,13 +25,13 @@ public class CloneList {
             pHead=pHead.next;
             foot.next=new RandomListNode(pHead.label);
             foot=foot.next;
-            data.put(pHead.label,foot);
+            data.put(pHead.label,foot);//保存复制出来的节点索引
         }
         tempHead=head;
         //拷贝random
         while (tempPHead!=null){
             if (tempPHead.random!=null){
-                tempHead.random= data.get(tempPHead.random.label);
+                tempHead.random= data.get(tempPHead.random.label);//获取节点索引
             }
             tempHead=tempHead.next;
             tempPHead=tempPHead.next;

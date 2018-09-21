@@ -29,12 +29,12 @@ public class TreeUtil {
     //递归遍历各节点，并利用String 统计路径，当满足target==0 &root.left==null&root.right==null，路径和为target，且为叶子节点
     public void   FindPath(TreeNode root, int target,String path) {
         if (root!=null) {
-            path += root.val+",";
-            target=target-root.val;
-            if (target==0 &root.left==null&root.right==null){
+            path += root.val+",";//记录路径
+            target=target-root.val;//和为target，即target减其为0
+            if (target==0 &root.left==null&root.right==null){//root.left==null&root.right==null为判断其是否叶子节点
                 ArrayList<Integer> arrayList=new ArrayList<>();
                 String[] st = path.split(",");
-                for (int i=0;i<st.length;i++)
+                for (int i=0;i<st.length;i++)//将路径添加到list中
                     arrayList.add(Integer.valueOf(st[i]));
                 arrayLists.add(arrayList);
             }

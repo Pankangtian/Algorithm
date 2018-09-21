@@ -27,13 +27,13 @@ public class printMatrix {
          * 一圈又分为四边，可以分为四个循环，注意各点边界
          */
         while (rowstart<=rowend&colstart<=colend){
-            for (int i=colstart;i<=colend;i++)
+            for (int i=colstart;i<=colend;i++)//打印上边
                 arrayList.add(matrix[rowstart][i]);
-            for (int i=rowstart+1;i<=rowend;i++)
+            for (int i=rowstart+1;i<=rowend;i++)//打印右边
                 arrayList.add(matrix[i][colend]);
-            for (int i=colend-1;i>=colstart&rowstart!=rowend;i--)//当rows小于cols时，会出现重复打印。故需加上判断
+            for (int i=colend-1;i>=colstart&rowstart!=rowend;i--)////打印右边  （当rows小于cols时，会出现重复打印。故需加上判断）
                 arrayList.add(matrix[rowend][i]);
-            for (int i=rowend-1;i>rowstart;i--)
+            for (int i=rowend-1;i>rowstart;i--)//打印左边
                 arrayList.add(matrix[i][colstart]);
             rowstart++;rowend--;colstart++;colend--;
         }
